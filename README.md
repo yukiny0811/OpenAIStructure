@@ -49,3 +49,5 @@ let result: TalkThemePack = try await OpenAIRequest.request(
 ## Notice
 
 Optimised for the *Responses API* with one `prompt` in, one `structured object` out.
+
+Supports String, Bool, Double, [String], [Bool], [Double], CustomStruct, [CustomStruct]
