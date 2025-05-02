@@ -2,7 +2,7 @@ import OpenAIStructure
 import Foundation
 
 @OpenAIStructure(name: "talk_theme_pack")
-struct TalkThemePack: Codable {
+struct TalkThemePack {
 
     @Field("Pack metadata")
     var meta: PackMeta
@@ -12,7 +12,7 @@ struct TalkThemePack: Codable {
 }
 
 @OpenAIStructure(name: "pack_meta")
-struct PackMeta: Codable {
+struct PackMeta {
 
     @Field("Title of the pack")
     var title: String
@@ -22,7 +22,7 @@ struct PackMeta: Codable {
 }
 
 @OpenAIStructure(name: "talk_theme")
-struct TalkTheme: Codable {
+struct TalkTheme {
 
     @Field("Theme title")
     var title: String
@@ -35,7 +35,7 @@ struct TalkTheme: Codable {
 }
 
 @OpenAIStructure(name: "question_block")
-struct QuestionBlock: Codable {
+struct QuestionBlock {
 
     @Field("Block label")
     var label: String
@@ -49,9 +49,9 @@ do {
     let result = try await OpenAIRequest.request(
         input: "Talk theme related to food.",
         instructions: "Provide some talk themes.",
-        model: .o4_mini(reasoningEffort: .low),
+        model: .gpt4_1_nano,
         object: TalkThemePack.self,
-        apiKey: ""
+        apiKey: "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"
     )
     print(result)
 } catch {
