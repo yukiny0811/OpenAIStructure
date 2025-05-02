@@ -1,11 +1,17 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+@attached(
+    member,
+    names:
+        named(schema),
+        named(object)
+)
+@attached(
+    extension,
+    conformances: OpenAIStructureObject,
+    names: named(schema), named(object)
+)
+public macro OpenAIStructure(name: String) = #externalMacro(module: "OpenAIStructureMacros", type: "OpenAIStructure")
 
-/// A macro that produces both a value and a string containing the
-/// source code that generated the value. For example,
-///
-///     #stringify(x + y)
-///
-/// produces a tuple `(x + y, "x + y")`.
-@freestanding(expression)
-public macro stringify<T>(_ value: T) -> (T, String) = #externalMacro(module: "OpenAIStructureMacros", type: "StringifyMacro")
+@attached(
+    peer
+)
+public macro Field(_ description: String) = #externalMacro(module: "OpenAIStructureMacros", type: "Field")

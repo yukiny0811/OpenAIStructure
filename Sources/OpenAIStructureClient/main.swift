@@ -1,8 +1,60 @@
 import OpenAIStructure
+import Foundation
 
-let a = 17
-let b = 25
+@OpenAIStructure(name: "talk_theme_pack")
+struct TalkThemePack: Codable {
 
-let (result, code) = #stringify(a + b)
+    @Field("Pack metadata")
+    var meta: PackMeta
 
-print("The value \(result) was produced by the code \"\(code)\"")
+    @Field("Array of talk themes")
+    var themes: [TalkTheme]
+}
+
+@OpenAIStructure(name: "pack_meta")
+struct PackMeta: Codable {
+
+    @Field("Title of the pack")
+    var title: String
+
+    @Field("note")
+    var note: String
+}
+
+@OpenAIStructure(name: "talk_theme")
+struct TalkTheme: Codable {
+
+    @Field("Theme title")
+    var title: String
+
+    @Field("Theme overview")
+    var overview: String
+
+    @Field("Question blocks")
+    var questionBlocks: [QuestionBlock]
+}
+
+@OpenAIStructure(name: "question_block")
+struct QuestionBlock: Codable {
+
+    @Field("Block label")
+    var label: String
+
+    @Field("List of questions")
+    var questions: [String]
+}
+
+
+do {
+    let result = try await OpenAIRequest.request(
+        input: "Talk theme related to food.",
+        instructions: "Provide some talk themes.",
+        model: .o4_mini(reasoningEffort: .low),
+        object: TalkThemePack.self,
+        apiKey: ""
+    )
+    print(result)
+} catch {
+    print(error)
+}
+
