@@ -41,7 +41,7 @@ let result: TalkThemePack = try await OpenAIRequest.request(
     input: "Talk theme related to food.",
     instructions: "Provide some talk themes.",
     model: .o4_mini(reasoningEffort: .low),
-    object: TalkThemePack.self,
+    object: TalkTheme.self,
     apiKey: "<your_api_key>"
 )
 ```
