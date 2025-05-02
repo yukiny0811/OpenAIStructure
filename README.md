@@ -1,5 +1,10 @@
 # OpenAIStructure
 
+[![Release](https://img.shields.io/github/v/release/yukiny0811/OpenAIStructure)](https://github.com/yukiny0811/OpenAIStructure/releases/latest)
+[![Swift Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyukiny0811%2FOpenAIStructure%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/yukiny0811/OpenAIStructure)
+[![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyukiny0811%2FOpenAIStructure%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/yukiny0811/OpenAIStructure)
+[![License](https://img.shields.io/github/license/yukiny0811/OpenAIStructure)](https://github.com/yukiny0811/OpenAIStructure/blob/main/LICENSE)
+
 **Swift Macro for OpenAI API Structured Outputs.**
 
 ## Usage
