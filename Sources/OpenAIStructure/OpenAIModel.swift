@@ -7,13 +7,13 @@
 
 import Foundation
 
-public enum ReasoningEffort: String, Codable {
+public enum ReasoningEffort: String, Codable, Sendable {
     case high
     case medium
     case low
 }
 
-public enum OpenAIModel {
+public enum OpenAIModel: Sendable {
     case gpt4_1
     case gpt4_1_mini
     case gpt4_1_nano
