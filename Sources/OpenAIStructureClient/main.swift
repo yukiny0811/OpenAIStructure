@@ -1,5 +1,6 @@
 import OpenAIStructure
 import Foundation
+import AppKit
 
 @OpenAIStructure(name: "talk_theme_pack")
 struct TalkThemePack {
@@ -51,10 +52,35 @@ do {
         instructions: "Provide some talk themes.",
         model: .gpt4_1_nano,
         object: TalkThemePack.self,
-        apiKey: "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"
+        apiKey: ""
     )
     print(result)
 } catch {
     print(error)
 }
 
+print("-------image-------")
+
+@OpenAIStructure(name: "describe_image")
+struct ImageDescriber {
+
+    @Field("description of the image")
+    var image_description: String
+}
+
+do {
+    let cgImage = Bundle.module.image(forResource: "apple")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+    let rep = NSBitmapImageRep(cgImage: cgImage)
+    let imageData = rep.representation(using: .png, properties: [:])!
+    let result = try await OpenAIRequest.request(
+        input: "Talk theme related to food.",
+        instructions: "Provide some talk themes.",
+        image: imageData,
+        model: .gpt4_1_nano,
+        object: ImageDescriber.self,
+        apiKey: ""
+    )
+    print(result)
+} catch {
+    print(error)
+}
