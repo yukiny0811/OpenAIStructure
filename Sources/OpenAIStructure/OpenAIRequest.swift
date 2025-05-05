@@ -8,18 +8,18 @@
 import Foundation
 
 public enum OpenAIRequest {
-    private static let endpoint = URL(string: "https://api.openai.com/v1/responses")!
+    public static let endpoint = URL(string: "https://api.openai.com/v1/responses")!
 
-    struct Payload<Schema: Codable>: Codable {
+    public struct Payload<Schema: Codable>: Codable {
         let model: String
         let input: String
         let reasoning: Reasoning
         let instructions: String
         let text: TextObject
-        struct Reasoning: Codable {
+        public struct Reasoning: Codable {
             let effort: String?
         }
-        struct TextObject: Codable {
+        public struct TextObject: Codable {
             let format: Schema
         }
     }
@@ -64,19 +64,19 @@ public enum OpenAIRequest {
         return result
     }
 
-    struct PayloadWithImage<Schema: Codable>: Codable {
+    public struct PayloadWithImage<Schema: Codable>: Codable {
         let model: String
         let input: [Input]
         let reasoning: Reasoning
         let instructions: String
         let text: TextObject
-        struct Reasoning: Codable {
+        public struct Reasoning: Codable {
             let effort: String?
         }
-        struct TextObject: Codable {
+        public struct TextObject: Codable {
             let format: Schema
         }
-        struct Input: Codable {
+        public struct Input: Codable {
             var role: String
             var content: [Content]
             init(content: [Content]) {

@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct AnyCodable: Codable, @unchecked Sendable {
-    let value: Any
+public struct AnyCodable: Codable, @unchecked Sendable {
+    public let value: Any
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if container.decodeNil() {
             self.value = ()
@@ -32,7 +32,7 @@ struct AnyCodable: Codable, @unchecked Sendable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch value {
         case is Void:             try container.encodeNil()

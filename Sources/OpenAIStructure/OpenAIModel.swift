@@ -19,7 +19,7 @@ public enum OpenAIModel: Sendable {
     case gpt4_1_nano
     case o4_mini(reasoningEffort: ReasoningEffort)
 
-    var modelName: String {
+    public var modelName: String {
         switch self {
         case .gpt4_1:
             "gpt-4.1"
@@ -32,7 +32,7 @@ public enum OpenAIModel: Sendable {
         }
     }
 
-    var hasReasoning: Bool {
+    public var hasReasoning: Bool {
         switch self {
         case .gpt4_1, .gpt4_1_mini, .gpt4_1_nano:
             false
