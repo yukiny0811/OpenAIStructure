@@ -69,9 +69,9 @@ struct TextContainer: Codable, Sendable {
 struct Format: Codable, Sendable {
     let type: String
     let description: String?
-    let name: String
-    let schema: AnyCodable
-    let strict: Bool
+    let name: String?
+    let schema: AnyCodable?
+    let strict: Bool?
 }
 
 struct Usage: Codable {

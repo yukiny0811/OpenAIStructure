@@ -84,3 +84,12 @@ do {
 } catch {
     print(error)
 }
+
+print("-------text-------")
+
+do {
+    let result = try await OpenAIRequest.request(input: "Talk something about fruits.", instructions: "", model: .gpt4_1_nano, apiKey: "")
+    print(result)
+} catch {
+    print(error)
+}

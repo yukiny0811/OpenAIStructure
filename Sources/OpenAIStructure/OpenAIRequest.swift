@@ -139,4 +139,63 @@ public enum OpenAIRequest {
         let result = try JSONDecoder().decode(T.self, from: text.data(using: .utf8)!)
         return result
     }
+
+    struct StringPayload: Codable {
+        let model: String
+        let input: String
+        let reasoning: Reasoning
+        let instructions: String
+        let text: TextObject
+        struct Reasoning: Codable {
+            let effort: String?
+        }
+        struct TextObject: Codable {
+            let format: Schema
+            init() {
+                self.format = .init()
+            }
+            struct Schema: Codable {
+                var type: String
+                init() {
+                    self.type = "text"
+                }
+            }
+        }
+    }
+
+    public static func request(input: String, instructions: String, model: OpenAIModel, apiKey: String) async throws -> String {
+        let endpoint = URL(string: "https://api.openai.com/v1/responses")!
+        var req = URLRequest(url: endpoint)
+        req.httpMethod = "POST"
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        let payload: StringPayload
+        if model.hasReasoning, case let OpenAIModel.o4_mini(reasoningEffort) = model {
+            payload = StringPayload(
+                model: model.modelName,
+                input: input,
+                reasoning: .init(
+                    effort: reasoningEffort.rawValue
+                ),
+                instructions: instructions,
+                text: .init()
+            )
+        } else {
+            payload = StringPayload(
+                model: model.modelName,
+                input: input,
+                reasoning: .init(effort: nil),
+                instructions: instructions,
+                text: .init()
+            )
+        }
+        req.httpBody = try JSONEncoder().encode(payload)
+        req.timeoutInterval = 300
+        let (data, _) = try await URLSession.shared.data(for: req)
+        guard let decoded = try? JSONDecoder().decode(OpenAIResponse.self, from: data) else {
+            throw OpenAIStructureError(message: String(data: data, encoding: .utf8) ?? "error")
+        }
+        let text = decoded.output.last!.content!.last!.text!
+        return text
+    }
 }
